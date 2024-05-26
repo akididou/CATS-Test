@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CurrencyCustomPipe } from '../../core/pipes/currency-custom.pipe';
+import { NotificationsService } from '../../core/services/notifications.service';
 
 @Component({
   selector: 'app-market',
@@ -33,6 +34,7 @@ export class MarketComponent implements OnInit {
 
   constructor(
     private marketService: MarketService,
+    private notificationService: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +48,9 @@ export class MarketComponent implements OnInit {
         console.log('this.doge', this.doge)
         this.dataSource = new MatTableDataSource(market.data);
         this.dataSource.sort = this.sort;
+      })
+      .catch(() => {
+        this.notificationService.notificationError()
       })
   }
 

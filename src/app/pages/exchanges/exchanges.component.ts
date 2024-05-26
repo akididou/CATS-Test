@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CurrencyCustomPipe } from '../../core/pipes/currency-custom.pipe';
 import { IExchange } from './exchanges.interface';
+import { NotificationsService } from '../../core/services/notifications.service';
 
 @Component({
   selector: 'app-exchanges',
@@ -33,6 +34,7 @@ export class ExchangesComponent implements OnInit {
 
   constructor(
     private exchangesService: ExchangesService,
+    private notificationService: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +48,9 @@ export class ExchangesComponent implements OnInit {
         console.log('this.bestExchange', this.bestExchange)
         this.dataSource = new MatTableDataSource(exchanges.data);
         this.dataSource.sort = this.sort;
+      })
+      .catch(() => {
+        this.notificationService.notificationError()
       })
   }
 
