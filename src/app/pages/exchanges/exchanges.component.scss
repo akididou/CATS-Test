@@ -1,0 +1,29 @@
+.mat-mdc-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.status {
+  background: #ee4e4e;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+}
+
+.green {
+  background: #acd793;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.premium {
+  background: #ffff80;
+}
+
+.premium-img {
+  width: 30px;
+}

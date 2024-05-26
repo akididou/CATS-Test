@@ -4,6 +4,7 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "strictPropertyInitialization": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -17,6 +18,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
+    "resolveJsonModule": true,
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
