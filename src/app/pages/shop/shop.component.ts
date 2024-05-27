@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { ShopService } from './shop.service';
-import { IAsset } from './shop.interface';
 import { NotificationsService } from '../../core/services/notifications.service';
 import { CommonModule } from '@angular/common';
+import { IMarket } from '../market/market.interface';
+import { Select, Store } from '@ngxs/store';
+import { SetCart } from '../../core/stores/actions/store.action';
+import { StoreState } from '../../core/stores/states/configuration.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shop',
@@ -24,25 +28,25 @@ import { CommonModule } from '@angular/common';
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss'
 })
-export class ShopComponent implements OnInit {
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
 
+export class ShopComponent implements OnInit {
   quantity: number = 0;
   price: number = 0;
-  asset: IAsset;
+  asset: IMarket;
+  @Select(StoreState.getAsset) asset$: Observable<IMarket>;
 
   constructor(
-    private _formBuilder: FormBuilder,
     private shopService: ShopService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
+    // Subscribe to Asset Store
+    this.asset$.subscribe(asset => {
+      this.asset = asset;
+    })
+
     this.getDoge();
   }
 
@@ -61,9 +65,22 @@ export class ShopComponent implements OnInit {
     } else {
       this.price = (this.quantity * 4) / Number(this.asset.priceUsd)
     }
+
+    // Store Cart
+    this.store.dispatch(new SetCart({
+      price: this.price,
+      quantity: this.quantity
+    }));
   }
 
   getDoge(): void {
+
+    const asset = this.store.selectSnapshot(StoreState.getAsset);
+    if (Object.values(asset).length > 0) {
+      this.asset = asset as IMarket;
+      return;
+    }
+
     this.shopService.get('dogecoin')
       .then(asset => {
         this.asset = asset.data;

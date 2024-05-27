@@ -1,18 +1,5 @@
-export interface IAsset {
-    id: string;
-    rank: string;
-    symbol: string;
-    name: string;
-    supply: string;
-    maxSupply: unknown,
-    marketCapUsd: string;
-    volumeUsd24Hr: string;
-    priceUsd: string;
-    changePercent24Hr: string;
-    vwap24Hr: string;
-    explorer: string;
-}
+import { IMarket } from "../market/market.interface";
 
 export interface IAssetAPI {
-    data: IAsset
+    data: IMarket;
 }

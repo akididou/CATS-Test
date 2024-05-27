@@ -45,7 +45,6 @@ export class ExchangesComponent implements OnInit {
     this.exchangesService.get()
       .then(exchanges => {
         this.bestExchange = exchanges.data.filter(d => d.rank === '1')
-        console.log('this.bestExchange', this.bestExchange)
         this.dataSource = new MatTableDataSource(exchanges.data);
         this.dataSource.sort = this.sort;
       })

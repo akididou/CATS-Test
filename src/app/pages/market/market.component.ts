@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CurrencyCustomPipe } from '../../core/pipes/currency-custom.pipe';
 import { NotificationsService } from '../../core/services/notifications.service';
+import { Store } from '@ngxs/store';
+import { SetAsset } from '../../core/stores/actions/store.action';
 
 @Component({
   selector: 'app-market',
@@ -34,7 +36,8 @@ export class MarketComponent implements OnInit {
 
   constructor(
     private marketService: MarketService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +48,7 @@ export class MarketComponent implements OnInit {
     this.marketService.get()
       .then(market => {
         this.doge = market.data.filter(d => d.id === 'dogecoin')
-        console.log('this.doge', this.doge)
+        this.store.dispatch(new SetAsset(this.doge[0]))
         this.dataSource = new MatTableDataSource(market.data);
         this.dataSource.sort = this.sort;
       })

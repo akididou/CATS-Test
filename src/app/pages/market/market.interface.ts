@@ -3,13 +3,13 @@ export interface IMarket {
     rank: string;
     symbol: string;
     name: string;
-    supply: number;
-    maxSupply: number;
-    marketCapUsd: number;
-    volumeUsd24Hr: number;
-    priceUsd: number;
-    changePercent24Hr: number;
-    vwap24Hr: number;
+    supply: string;
+    maxSupply: unknown,
+    marketCapUsd: string;
+    volumeUsd24Hr: string;
+    priceUsd: string;
+    changePercent24Hr: string;
+    vwap24Hr: string;
     explorer: string;
 }
 
