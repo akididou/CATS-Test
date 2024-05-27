@@ -16,6 +16,7 @@ Run `npm run dev` for a dev server. Navigate to `http://localhost:4200/`. The ap
  Ici le choix à été de ne pas surcharger l'application avec une autre librairie alors que Angular Material peut largement faire le travail
  - Mat-Stepper : Afin de faire un semblant de parcours d'achat pour les tickets de transport. 
  - Travail en features séparées
+ - Mise en place de notifications en cas de succes/error lors de call API
 
 
 ## Pour aller plus loin
