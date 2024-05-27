@@ -1,27 +1,28 @@
-# CATSTest
+# Test technique CATS 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+Le projet est visible sur mon site : https://cats.jppoizat.fr
+
+Le projet à été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm run dev` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Point technique utilisé 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ - Store : Pour éviter un call à l'API des assets 
+ - Custom Pipe : Afin de mettre en forme les données récupérées de l'API
+ - Mat-Table : Afin de mettre en ordre les données récupérées de l'API. 
+ Ici le choix à été de ne pas surcharger l'application avec une autre librairie alors que Angular Material peut largement faire le travail
+ - Mat-Stepper : Afin de faire un semblant de parcours d'achat pour les tickets de transport. 
+ - Travail en features séparées
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Pour aller plus loin
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Dans l'idée ou ce projet serait celui d'un vrai projet d'entreprise, nous aurions pu aller plus loin en ajoutant des fonctionnalités tel que : 
+ - Mise en place d'un Virtual Scrool pour optimiser les perfomances du tableau.
+ - Gérer une pagination dans le call à l'API pour les assets et les exchanges
+ - Mise en place de test end 2 end afin de vérifier les calls aux APIs et leur bon affichage
+ - Mise en place d'un CI/CD, qui vérifirait le code et push automatiquement en préprod/prod suivant la branch 
+ - Mettre un loader sur l'appel API 
